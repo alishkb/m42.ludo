@@ -1,6 +1,6 @@
-import logic.player
 from logic.act import *
 from logic.move import *
+import logic.player
 
 player_num = i = 1
 player_c = ['red', 'blue', 'green', 'yellow']
