@@ -14,4 +14,4 @@ def add(*args):
 
 
 def data(*args):
-    players_data[args[0]] = args[1], args[2]
+    players_data[args[0]] = args[1]
