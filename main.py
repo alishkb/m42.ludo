@@ -2,8 +2,6 @@ from logic.act import *
 from logic.move import *
 from logic.player import *
 
-# import logic.player
-
 player_num = i = 1
 player_c = ['red', 'blue', 'green', 'yellow']
 user_c = None
@@ -31,6 +29,7 @@ j = 0
 while True:
     num = j % player_num
     user = users_li[num]
+    winner_list = []
     if check_final(user, pos):
         pass
     else:
@@ -44,6 +43,7 @@ while True:
                 choice = input(f'Enter your mark {user}: ')
                 res = moving(user, choice, chance, pos, home)
                 if res == 'WIN':
+                    winner_list.append(user)
                     print(f'CONGRATULATION {user}!')
                     if check_final(user, pos):
                         break
@@ -57,6 +57,8 @@ while True:
                 else:
                     break
     if check_end(pos):
-        print('Play is finished!')
+        print('Play is finished! Winners are:')
+        for i in winner_list:
+            print(i)
         break
     j += 1

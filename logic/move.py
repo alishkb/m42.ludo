@@ -37,7 +37,7 @@ def moving(user, choice, chance, pos, home):
 
 def go_win(user, pos):
     for i in range(1, 5):
-        if pos[f'{user}{i}']:
+        if pos[f'{user}{i}'] != 100:
             return False
     return True
 
@@ -60,30 +60,3 @@ def check(user, cell, pos):
         return True
     else:
         return True
-
-# class Mark:
-#     cells = [i for i in range(1, 25)]
-#     positions = start(2)
-#
-#     # args is the number of player
-#     def __init__(self, num, which, position=-1):
-#         self.num = num
-#         self.which = which
-#         self.position = position
-#
-#     def move(self, count, positions):
-#         new = self.position + count
-#         if new not in positions.get(self.num).values():
-#             if new in positions.values().values():
-#                 Mark.remove(new, positions)
-#             self.position = (self.position + count) % 24
-#             positions[self.num][self.which] = self.position
-#         else:
-#             return False
-#
-#     @staticmethod
-#     def remove(new, positions):
-#         for i in positions.keys():
-#             for j in i.keys():
-#                 if i.get(j) == new:
-#                     positions[i][j] = -1
