@@ -1,9 +1,11 @@
-def start(user_data):
+def start(user_data, user_o):
     positions = {}
     l_of_mark = [1, 2, 3, 4]
+    k = 0
     for i in user_data:
-        pos = {f"{i}{j}": -1 for j in l_of_mark}
+        pos = {f"{i}{j}": user_o[k] for j in l_of_mark}
         positions.update(pos)
+        k += 1
     return positions
 
 

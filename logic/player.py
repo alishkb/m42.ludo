@@ -1,5 +1,7 @@
+# from ludogi import *
+
 players = {'ali': 'alish'}
-players_data = {}
+# players_data = player
 
 
 def add(*args):
@@ -13,5 +15,5 @@ def add(*args):
         return False
 
 
-def data(*args):
-    players_data[args[0]] = args[1]
+# def data(*args):
+#     players_data[args[0]] = args[1]

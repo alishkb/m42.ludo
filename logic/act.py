@@ -6,26 +6,45 @@ def dice():
     return randrange(1, 7)
 
 
-def player_home(players):
-    if players == 2:
+def player_home(players_num):
+    if players_num == 2:
         return [0, 12]
-    elif players == 3:
+    elif players_num == 3:
         return [0, 6, 12]
     else:
         return [0, 6, 12, 18]
 
 
-def check_final(user, pos):
+def player_out(players_num):
+    if players_num == 2:
+        return ['s1', 's3']
+    elif players_num == 3:
+        return ['s1', 's2', 's3']
+    else:
+        return ['s1', 's2', 's3', 's4']
+
+
+def player_win(players_num):
+    if players_num == 2:
+        return ['f1', 'f3']
+    elif players_num == 3:
+        return ['f1', 'f2', 'f3']
+    else:
+        return ['f1', 'f2', 'f3', 'f4']
+
+
+def check_final(user, pos, user_win):
     for i in range(1, 5):
-        if pos[f'{user}{i}'] != 100:
+        if pos[f'{user}{i}'] != user_win:
             return False
     return True
 
 
-def check_end(pos):
-    for i in pos.values():
-        if i != 100:
-            return False
+def check_end(users, pos, end_list):
+    for n in range(len(users)):
+        for i in range(1, 5):
+            if pos[f'{users[n]}{i}'] != end_list[n]:
+                return False
     return True
 
 
@@ -34,6 +53,15 @@ def check_marks(user, chance, pos, home):
         if check_mark(user, choice, chance, pos, home):
             return True
     return False
+
+    # pos_test = pos
+    # if check_marks(user, chance, pos_test, home):
+    #     print(pos)
+    #     print(pos_test)
+    #     print('you should choose another mark!')
+    # else:
+    #     k += 1
+    #     break
 
 
 def check_mark(user, choice, chance, pos, home):
