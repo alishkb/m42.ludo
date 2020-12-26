@@ -6,6 +6,7 @@ from logic.move import *
 
 # from main import *
 
+# TODO: defining hard-coded users is not good! Use file instead.
 player_db = {'ali': 'alish', 'mina': 'minash'}
 # color = []
 
@@ -14,6 +15,7 @@ start_win.geometry('300x300')
 start_win.resizable(False, False)
 start_win.title('Hi LUDOer!')
 
+# TODO: Not a good dictionary name. better: players
 player = {}
 
 
@@ -41,6 +43,7 @@ def game():
         cnv.create_oval(positions.get(f'f{i}'), fill='springgreen')
     cnv.place(relx=0, rely=0)
 
+    # TODO: Defining nested functions is usually dirty code except a few cases like decorator.
     def lon_in():
         if len(player.keys()) < 4:
             login_win = Tk()
@@ -63,11 +66,12 @@ def game():
             lb_color = Label(login_win, text='color :')
             lb_color.place(relx=.1, rely=.4, width=60)
 
+            # TODO: Again nested functions!
             def check_sign():
                 try:
                     if en_user.get() in player_db.keys() and player_db.get(en_user.get()) == en_pass.get():
                         if en_color.get() not in player.values() and en_color.get():
-                            if en_user.get() not in player.keys():
+                            if en_user.get() not in player:
                                 f = len(player.keys()) + 1
                                 player.update({en_user.get(): en_color.get()})
                                 lb_playing = Label(win, text=f'{f}- {en_user.get()}', font=('Arial', 10, 'bold'),
@@ -145,6 +149,7 @@ def game():
     def new_game():
         # save datas
         win.destroy()
+        # TODO: using "global" causes usually a dirty code! Do not use it at all except somewhere really necessary!
         global player
         player = {}
         game()
@@ -156,13 +161,16 @@ def game():
             game_menu.entryconfigure(0, state='disable')
             game_menu.entryconfigure(1, state='disable')
             player_num = len(player.keys())
-            users_li = [s for s in player.keys()]
+            # users_li = [s for s in player.keys()]
+            users_li = list(player.keys())  # It is better!
 
             user_h = player_home(player_num)
             user_o = player_out(player_num)
             user_f = player_win(player_num)
             pos = start(users_li, user_o)
 
+            # TODO: You are using too much nested things! Now a nested class! Do not define everyhing nested.
+            # TODO: Define it directly in the module (global scope).
             class Btn:
                 def __init__(self, x, y, name, color):
                     self.x = x
@@ -191,10 +199,18 @@ def game():
             #         nut_dic = {nut: (positions.get(e)[0] + 10, positions.get(e)[1] + 10)}
             #         btn.append(nut_dic)
             btn = {}
-            pq = []
-            for p in player.keys():
-                for q in [1, 2, 3, 4]:
-                    pq.append(f'{p}{q}')
+            # pq = []
+            # for p in player.keys():
+            #     for q in [1, 2, 3, 4]:
+            #         pq.append(f'{p}{q}')
+            pq = [f'{p}{q}' for p in player for q in range(1, 5)]  # It is better!
+
+            # TODO: Instead of defining a list of strings:
+            #  ['userA1', 'userA2', ...] ,
+            #  define a list of tuples : [('userA', 1), ('userA', 2) , ... ]
+            # Also define pos as dictionary of tuples to everything you want :
+            # {('userA', 1): value1, ('userA', 2): value2 , ...}
+
             for k in pq:
                 e = pos.get(k)
                 c = player.get(k[:-1])
@@ -277,6 +293,7 @@ def game():
     lb_player.place(x=25, y=20, width=200)
 
 
+# TODO: This empty entrance page is not a good design.
 btn_start = ttk.Button(start_win, text='Start **AliSH LUDO**', command=game)
 btn_start.place(relx=.2, rely=.6, width=180)
 

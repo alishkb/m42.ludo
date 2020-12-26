@@ -7,6 +7,11 @@ win.resizable(False, False)
 win.title('AliSH - LUDO')
 
 player = {'ali': 'alish'}
+# TODO: You have totally a functional approach for programming.
+# OOP is better! For example define classes such as: Player, Piece, Game, ...
+# Then you create maximum 4 players, exactly 4 pieces for each player.
+# Everything related to your global game settings and board goes under a class named "Game".
+# Then only one instance of Game is created.
 
 
 def sign_in():
@@ -25,6 +30,7 @@ def sign_in():
     lb_pass = Label(login, text='password : ')
     lb_pass.place(relx=0.1, rely=0.25)
 
+    # TODO: Again nested functions! Bad code!
     def check_sign():
         try:
 

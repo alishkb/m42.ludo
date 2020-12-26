@@ -3,6 +3,9 @@ def start(user_data, user_o):
     l_of_mark = [1, 2, 3, 4]
     k = 0
     for i in user_data:
+        # TODO: I wrote in ludogui.py too:
+        #  define positions as dictionary of tuples to everything you want :
+        #  {('userA', 1): value1, ('userA', 2): value2 , ...}
         pos = {f"{i}{j}": user_o[k] for j in l_of_mark}
         positions.update(pos)
         k += 1
@@ -45,7 +48,8 @@ def go_win(user, pos):
 
 
 def remove(cell, pos):
-    for i in pos.keys():
+    # for i in pos.keys():
+    for i in pos:  # When you are iterating on dictionaries it is sufficient to write: for i in pos
         if pos[i] == cell:
             pos[i] = -1
             return f'{i} has removed!'
